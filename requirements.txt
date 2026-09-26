@@ -1,0 +1,7 @@
+pywin32
+pyodbc
+pandas
+numpy
+matplotlib
+scikit-learn
+streamlit
