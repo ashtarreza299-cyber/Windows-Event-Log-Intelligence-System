@@ -1,6 +1,6 @@
 
 import pyodbc as db
-
+from sqlalchemy import create_engine
 
 SERVER = 'localhost,1533'
 DATABASE = 'WindowsLogIntelligence'
@@ -18,5 +18,11 @@ connection_string = (
 )
 
 def connect_db():
-
+    """Returns a raw pyodbc connection (for store_events.py)"""
     return db.connect(connection_string)
+
+def get_sqlalchemy_engine():
+    """Returns a SQLAlchemy engine (for Pandas data_preprocessing.py)"""
+    # SQLAlchemy connection string format: mssql+pyodbc://user:pass@host:port/db?driver=...
+    engine_string = f"mssql+pyodbc://{USERNAME}:{PASSWORD}@{SERVER}/{DATABASE}?driver=ODBC+Driver+17+for+SQL+Server&TrustServerCertificate=yes"
+    return create_engine(engine_string)
